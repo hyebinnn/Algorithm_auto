@@ -1,22 +1,11 @@
 def solution(citations):
     citations.sort()
-    # print(citations)
-    maxH = citations[-1]
-    hIndex = 0
-    # cnt = 0
-    for maxH in range(citations[-1], -1, -1):
+    for h in range(citations[-1], -1, -1):
         cnt = 0
         for i in range(len(citations)-1, -1, -1):
-            if citations[i] >= maxH:
+            if citations[i] >= h:
                 cnt += 1
-            elif citations[i] < maxH and cnt < maxH:
+            elif citations[i] < h and cnt < h:               # h is so big -> get next h
                 break
-        if cnt >= maxH:
-            return maxH
-            
-        
-#         quoteMore = len(citations[i:])
-#         if quoteMore >= citations[i]:
-#             hIndex = citations[i]
-            
-#     return hIndex
+        if cnt >= h:
+            return h
