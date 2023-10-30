@@ -5,9 +5,3 @@ def solution(participant, completion):
         if participant[i] != completion[i]:
             return participant[i]
     return participant[-1]
-    
-    # for x in participant:
-    #     if x not in completion: 
-    #         return x
-    #     else:
-    #         completion.remove(x)
