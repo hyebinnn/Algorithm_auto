@@ -3,8 +3,8 @@ def solution(s):
     for char in s:
         if stack and stack[-1] == char:
             stack.pop()
-            continue
-        stack.append(char)
+        else:
+            stack.append(char)
         
     if stack:
         return 0
