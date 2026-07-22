@@ -1,20 +1,17 @@
 def solution(name, yearning, photo):
     answer = []
     
-    m = dict()
+    score = dict(zip(name, yearning))
+    # for i in range(len(name)):
+    #     m[name[i]] = yearning[i]
     
-    for i in range(len(name)):
-        m[name[i]] = yearning[i]
-    
-    for i in range(len(photo)):
-        result = 0
-        for j in range(len(photo[i])):
-            p = photo[i][j]
-            
-            if p in m.keys():
-                result += m[p]
+    for people in photo:
+        total = 0
+        for p in people:
+            if p in score:
+                total += score.get(p, 0)
         
-        answer.append(result)
+        answer.append(total)
                 
     
     return answer
