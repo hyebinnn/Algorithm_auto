@@ -1,12 +1,15 @@
-from itertools import combinations, permutations, product, combinations_with_replacement
-
 def solution(word):
     alphabet = ['A', 'E', 'I', 'O', 'U']
-    dictionary = []
-    for i in range(1, 6):
-        dictionary.extend(list(product(alphabet, repeat=i)))
-
-    dictionary.sort()
-    tupleWord = tuple(word)
+    possible_words = []
     
-    return dictionary.index(tupleWord)+1
+    def dfs(current):
+        if len(current) == len(alphabet):
+            return
+        
+        for a in alphabet:
+            possible_words.append(current+a)
+            dfs(current+a)
+
+    dfs("")
+    possible_words.sort()
+    return possible_words.index(word)+1
