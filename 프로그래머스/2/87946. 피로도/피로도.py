@@ -1,20 +1,21 @@
-from itertools import permutations
-
 def solution(k, dungeons):
-    maxDungeon, cntDungeon = 0, 0
-    n = len(dungeons)
-    sequence = list(permutations(dungeons, n))
-    for seq in sequence:
-        # print("=====================")
-        fatigue = k
-        cntDungeon = 0
-        for dungeon in seq:
-            if fatigue >= dungeon[0]:
-                fatigue -= dungeon[1]
-                cntDungeon += 1
-            # print("조합: {0}\n현재 피로도: {1} & 현재 던전: {2}\ncount : {3}\n\n".format(seq, fatigue, dungeon, cntDungeon))
-        if maxDungeon < cntDungeon:
-            maxDungeon = cntDungeon
-            
-            
-    return maxDungeon
+    visited = [False] * len(dungeons)
+
+    def dfs(energy):
+        best = 0
+
+        for i in range(len(dungeons)):
+            required, cost = dungeons[i]
+
+            # 이미 방문했거나 입장할 피로도가 부족하면 건너뛰기
+            if visited[i] or energy < required:
+                continue
+
+            visited[i] = True
+            candidate = 1 + dfs(energy - cost)
+            best = max(best, candidate)
+            visited[i] = False
+
+        return best
+
+    return dfs(k)
