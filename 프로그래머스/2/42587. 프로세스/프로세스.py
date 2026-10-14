@@ -7,10 +7,8 @@ def solution(priorities, location):
     while queue:
         idx, priority = queue.popleft()
         
-        for ni, np in queue:
-            if np > priority:
-                queue.append((idx, priority))
-                break
+        if any(p > priority for _, p in queue):
+            queue.append((idx, priority))
         else:
             cnt += 1
             
