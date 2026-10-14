@@ -1,28 +1,22 @@
 from collections import deque
 
 def solution(progresses, speeds):
-    queue = deque(enumerate(progresses))
-    cnt = 0
+    queue = deque(zip(progresses, speeds))
     result = []
     
     while queue:
-        idx, progress = queue.popleft()
-            
-        if progress >= 100:
+        cnt = 0
+        
+        # 작업 
+        for i in range(len(queue)):
+            p, s = queue[i]
+            queue[i] = (p+s, s)
+        
+        while queue and queue[0][0] >= 100:
             cnt += 1
-            continue
+            queue.popleft()
             
-        if cnt > 0: 
+        if cnt != 0:
             result.append(cnt)
-            cnt = 0
-            
-        queue.appendleft((idx, progress))
-        
-        for pos in range(len(queue)):
-            i, progress = queue[pos]
-            queue[pos] = (i, progress+speeds[i])
-        
-    if cnt > 0:
-        result.append(cnt)
         
     return result
