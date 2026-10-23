@@ -9,23 +9,19 @@ def solution(maps):
     direction = [(0, 1), (1, 0), (-1, 0), (0, -1)]
     visited = [[0] * M for _ in range(N)]
     visited[0][0] = 1
-    progress = [[INF] * M for _ in range(N)] 
-    progress[0][0] = 1
-    
     
     while queue:
         x, y = queue.popleft()
         for dx, dy in direction:
             nx, ny = x+dx, y+dy
-            if 0<=nx<N and 0<=ny<M and maps[nx][ny] and not visited[nx][ny]:
+            if 0<=nx<N and 0<=ny<M and maps[nx][ny] and visited[nx][ny] == 0:
                 queue.append((nx, ny))
-                visited[nx][ny] = 1
-                progress[nx][ny] = min(progress[nx][ny], progress[x][y]+1)
+                visited[nx][ny] = visited[x][y] + 1
             
-    if progress[N-1][M-1] == INF:
+    if visited[N-1][M-1] == 0:
         return -1
     else:
-        return progress[N-1][M-1]
+        return visited[N-1][M-1]
     
     
     
