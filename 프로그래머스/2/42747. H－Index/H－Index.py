@@ -1,11 +1,20 @@
 def solution(citations):
-    citations.sort()
-    for h in range(citations[-1], -1, -1):
-        cnt = 0
-        for i in range(len(citations)-1, -1, -1):
-            if citations[i] >= h:
+    mid = 0
+    citations.sort(reverse=True)
+    
+    print(citations)
+    
+    while True:
+        cnt = 0      # h번 이상 인용된 논문의 갯수
+        for c in citations:
+            if c >= mid:
                 cnt += 1
-            elif citations[i] < h and cnt < h:               # h is so big -> get next h
+            else:
                 break
-        if cnt >= h:
-            return h
+        
+        if mid > cnt:
+            break
+            
+        mid += 1
+        
+    return mid-1
