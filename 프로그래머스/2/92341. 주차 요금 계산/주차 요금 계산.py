@@ -26,10 +26,8 @@ def solution(fees, records):
     final_time = to_minute("23:59")
     
     # 차량 번호가 작은 순으로 정렬
-    board = dict(sorted(board.items()))
-    
     # 출차 정보가 없는 차
-    for cn, t in board.items():
+    for cn, t in sorted(board.items()):
         if t <= 0:
             board[cn] += final_time
             
