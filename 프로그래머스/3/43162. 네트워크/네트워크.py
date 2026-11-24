@@ -1,21 +1,32 @@
+from collections import defaultdict
+
 def solution(n, computers):
+    link = defaultdict(list)
     visited = [False] * n
     
-    def dfs(idx):
-        visited[idx] = 1
-        
-        for k in range(n):
-            if k == idx:
+    for i in range(len(computers)):
+        for j in range(len(computers[0])):
+            if i == j:
                 continue
-            if computers[idx][k] == 1 and not visited[k]:
-                dfs(k)
+            
+            if computers[i][j] == 1:
+                link[i].append(j)
+        
+        
+    def dfs(computer):
+        visited[computer] = True
 
-    cnt = 0
+        for value in link[computer]:
+            if not visited[value]:
+                dfs(value)
+        
     
+    # computer iteration
+    network = 0
     for i in range(n):
         if not visited[i]:
             dfs(i)
-            cnt += 1
-            
+            network += 1
         
-    return cnt
+    
+    return network
