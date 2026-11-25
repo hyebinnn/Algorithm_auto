@@ -1,13 +1,10 @@
 def solution(s):
     stack = []
-    
-    for x in s:
-        if stack:
-            if stack[-1] == x:
-                stack.pop()
-                continue
-
-        stack.append(x)
+    for ss in s:
+        if stack and stack[-1] == ss:
+            stack.pop()
+            continue
         
+        stack.append(ss)
         
     return 0 if stack else 1
