@@ -1,13 +1,5 @@
-from collections import defaultdict
-
 def solution(nums):
-    mon = defaultdict(int)
+    kind = len(set(nums))
     count = len(nums) / 2
     
-    for n in nums:
-        mon[n] += 1
-        
-    if len(mon.keys()) > count:
-        return count
-    else:
-        return len(mon.keys())
+    return count if kind > count else kind
