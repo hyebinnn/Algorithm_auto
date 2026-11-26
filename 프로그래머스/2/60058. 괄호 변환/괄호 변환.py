@@ -1,16 +1,12 @@
 def is_correct(s):
-    stack = []
+    cnt = 0
     for ss in s:
-        if ss == ")":
-            if not stack:
-                return False
-            if stack[-1] == "(":
-                stack.pop()
-                continue
+        cnt += 1 if ss == "(" else -1
+        if cnt < 0:
+            return False
         
-        stack.append(ss)
-        
-    return not(stack)
+    return not cnt
+            
             
     
 
@@ -33,17 +29,8 @@ def solution(p):
     if is_correct(u):
         return u + solution(v)
     else:
-        temp = "("
-        temp = temp + solution(v) + ")"
-        u = list(u[1:len(u)-1])
-        
-        for i in range(len(u)):
-            if u[i] == "(": 
-                u[i] = ")"
-            else:
-                u[i] = "("
-        
-        temp += ''.join(u)
+        flipped = ''.join(")" if x == '(' else "(" for x in u[1:-1])
+        temp = "(" + solution(v) + ")" + flipped
     
         return temp 
         
