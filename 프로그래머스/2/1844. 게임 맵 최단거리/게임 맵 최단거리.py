@@ -20,9 +20,10 @@ def solution(maps):
             if not (0<=nx<M and 0<=ny<N) or maps[nx][ny] == 0:
                 continue
                 
-            board[nx][ny] = min(board[nx][ny], board[x][y] + 1)
+            # board[nx][ny] = min(board[nx][ny], board[x][y] + 1)
             
             if not visited[nx][ny]:
+                board[nx][ny] = board[x][y] + 1
                 # 다음으로 이동할 좌표
                 queue.append((nx, ny))
                 visited[nx][ny] = True
